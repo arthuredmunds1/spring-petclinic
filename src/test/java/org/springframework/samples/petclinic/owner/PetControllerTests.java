@@ -32,6 +32,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.context.annotation.Import;
+import org.springframework.samples.petclinic.MockWebSecurityConfig;
+import org.springframework.security.test.context.support.WithMockUser;
+
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -47,8 +51,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @WebMvcTest(value = PetController.class,
 		includeFilters = @ComponentScan.Filter(value = PetTypeFormatter.class, type = FilterType.ASSIGNABLE_TYPE))
+@Import(MockWebSecurityConfig.class)
 @DisabledInNativeImage
 @DisabledInAotMode
+@WithMockUser(roles = "ADMIN")
 class PetControllerTests {
 
 	private static final int TEST_OWNER_ID = 1;

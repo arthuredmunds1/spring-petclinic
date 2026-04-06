@@ -45,6 +45,10 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
+import org.springframework.context.annotation.Import;
+import org.springframework.samples.petclinic.MockWebSecurityConfig;
+import org.springframework.security.test.context.support.WithMockUser;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -56,8 +60,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @author Wick Dynex
  */
 @WebMvcTest(OwnerController.class)
+@Import(MockWebSecurityConfig.class)
 @DisabledInNativeImage
 @DisabledInAotMode
+@WithMockUser(roles = "ADMIN")
 class OwnerControllerTests {
 
 	private static final int TEST_OWNER_ID = 1;

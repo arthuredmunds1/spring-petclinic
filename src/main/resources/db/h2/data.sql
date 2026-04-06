@@ -51,3 +51,5 @@ INSERT INTO visits VALUES (default, 7, '2013-01-01', 'rabies shot');
 INSERT INTO visits VALUES (default, 8, '2013-01-02', 'rabies shot');
 INSERT INTO visits VALUES (default, 8, '2013-01-03', 'neutered');
 INSERT INTO visits VALUES (default, 7, '2013-01-04', 'spayed');
+
+INSERT INTO users (username, password, role) VALUES ('admin', '$2a$10$LAhexq2.GkFq7G0usHwf7OHvcR1ZazfbPl0G8kwT9f4TYnqrPdPCu', 'ADMIN');
