@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'users')}">
+<body>
+  <h2 th:text="${user.new} ? 'New User' : 'Edit User'"></h2>
+
+  <form th:action="${user.new} ? @{/users/new} : @{/users/{id}/edit(id=${user.id})}"
+        th:object="${user}" method="post">
+
+    <div class="mb-3">
+      <label for="username" class="form-label" th:text="#{username}">Username</label>
+      <input type="text" id="username" th:field="*{username}" class="form-control"
+             th:classappend="${#fields.hasErrors('username')} ? 'is-invalid'"/>
+      <div class="invalid-feedback" th:errors="*{username}"></div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">
+        <span th:text="#{password}">Password</span>
+        <small th:unless="${user.new}" th:text="#{leaveBlankToKeepCurrent}" class="text-muted">(leave blank to keep current)</small>
+      </label>
+      <input type="password" id="password" name="password" class="form-control"
+             th:classappend="${#fields.hasErrors('password')} ? 'is-invalid'"/>
+      <div class="invalid-feedback" th:errors="*{password}"></div>
+    </div>
+
+    <div class="mb-3">
+      <label for="role" class="form-label" th:text="#{role}">Role</label>
+      <select id="role" th:field="*{role}" class="form-select"
+              th:classappend="${#fields.hasErrors('role')} ? 'is-invalid'">
+        <option th:each="r : ${roles}" th:value="${r}" th:text="${r}"></option>
+      </select>
+      <div class="invalid-feedback" th:errors="*{role}"></div>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input type="checkbox" id="enabled" th:field="*{enabled}" class="form-check-input"/>
+      <label for="enabled" class="form-check-label" th:text="#{enabled}">Enabled</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary" th:text="#{save}">Save</button>
+    <a th:href="@{/users}" class="btn btn-outline-secondary ms-2" th:text="#{cancel}">Cancel</a>
+  </form>
+</body>
+</html>
