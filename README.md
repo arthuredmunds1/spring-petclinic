@@ -87,6 +87,16 @@ or
 docker compose up postgres
 ```
 
+## Default Credentials
+
+A default admin account is seeded into the database at startup via the `data.sql` file for each supported database (H2, MySQL, PostgreSQL). The credentials are:
+
+| Username | Password |
+|----------|----------|
+| `admin`  | `admin`  |
+
+> **Warning:** These credentials are hardcoded in the `data.sql` files and are intended for local development only. Do not use them in any environment exposed to untrusted users.
+
 ## Test Applications
 
 At development time we recommend you use the test applications set up as `main()` methods in `PetClinicIntegrationTests` (using the default H2 database and also adding Spring Boot Devtools), `MySqlTestApplication` and `PostgresIntegrationTests`. These are set up so that you can run the apps in your IDE to get fast feedback and also run the same classes as integration tests against the respective database. The MySql integration tests use Testcontainers to start the database in a Docker container, and the Postgres tests use Docker Compose to do the same thing.
